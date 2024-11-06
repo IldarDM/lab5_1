@@ -39,22 +39,22 @@ data class Artwork(
 object Data {
     val images = listOf(
         Artwork(
-            title = "Название 1",
-            artist = "Автор 1",
-            year = 2024,
-            image = R.drawable.art1
+            title = "Дети в санях",
+            artist = "Пелевин Иван Андреевич",
+            year = 1870,
+            image = R.drawable.kids
         ),
         Artwork(
-            title = "Название 1",
-            artist = "Автор 1",
-            year = 2023,
-            image = R.drawable.art2
+            title = "Иван Шишкин",
+            artist = "Утро в сосновом лесу",
+            year = 1889,
+            image = R.drawable.shishkinn
         ),
         Artwork(
-            title = "Название 1",
-            artist = "Автор 1",
-            year = 2022,
-            image = R.drawable.art3
+            title = "Воскресный день",
+            artist = "Корзухин Алексей",
+            year = 1884,
+            image = R.drawable.sunday
         )
     )
 }
