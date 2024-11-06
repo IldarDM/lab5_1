@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.sp
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.material3.Button
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -86,6 +87,21 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
+    fun DisplayController(onPreviousArtwork: () -> Unit, onNextArtwork: () -> Unit) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Button(onClick = onPreviousArtwork) {
+                Text(text = "Назад")
+            }
+            Button(onClick = onNextArtwork) {
+                Text(text = "Дальше")
+            }
+        }
+    }
+
+    @Composable
     fun ArtSpaceScreen() {
         val artworkList = Data.images
         var currentArtworkIndex by remember { mutableStateOf(0) }
@@ -101,6 +117,17 @@ class MainActivity : ComponentActivity() {
             Text(text = currentArtwork.title, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = "by ${currentArtwork.artist}", fontSize = 16.sp)
+            Spacer(modifier = Modifier.height(16.dp))
+            DisplayController(
+                onPreviousArtwork = {
+                    currentArtworkIndex =
+                        if (currentArtworkIndex > 0) currentArtworkIndex - 1 else artworkList.size - 1
+                },
+                onNextArtwork = {
+                    currentArtworkIndex =
+                        if (currentArtworkIndex < artworkList.size - 1) currentArtworkIndex + 1 else 0
+                }
+            )
         }
     }
 }
