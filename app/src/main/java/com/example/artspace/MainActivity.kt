@@ -13,10 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import com.example.artspace.R
 
 class MainActivity : ComponentActivity() {
@@ -64,6 +69,23 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
+    fun ArtworkWall(@DrawableRes image: Int) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .shadow(elevation = 8.dp)
+                .background(Color.White)
+                .padding(20.dp)
+                .size(300.dp)
+        ) {
+            Image(
+                painter = painterResource(id = image),
+                contentDescription = null
+            )
+        }
+    }
+
+    @Composable
     fun ArtSpaceScreen() {
         val artworkList = Data.images
         var currentArtworkIndex by remember { mutableStateOf(0) }
@@ -74,6 +96,8 @@ class MainActivity : ComponentActivity() {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxSize()
         ) {
+            ArtworkWall(image = currentArtwork.image)
+            Spacer(modifier = Modifier.height(8.dp))
             Text(text = currentArtwork.title, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = "by ${currentArtwork.artist}", fontSize = 16.sp)
